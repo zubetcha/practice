@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "dev:my-todo": "yarn workspace my-todo dev",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",

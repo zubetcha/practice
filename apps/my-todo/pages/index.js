@@ -1,37 +1,37 @@
-import { useState } from "react"
-import styled from "styled-components"
-import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { useNavigate } from "../hooks/useNavigate";
 
-import { addTodo } from "../store/modules/todos"
+import { addTodo } from "../store/modules/todos";
 
-import { TodoItem, StyledButton } from "../components/TodoItem"
-import { Input } from "../components/Input"
+import { TodoItem, StyledButton } from "../components/TodoItem";
+import { Input } from "../components/Input";
 
 export default function Home() {
-  const navigate = useRouter().push;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [value, setValue] = useState({ title: "", desc: "" });
 
-  const { todos } = useSelector(({todos}) => todos);
-  console.log(todos)
+  const { todos } = useSelector(({ todos }) => todos);
+  console.log(todos);
 
   const data = {
     id: 1,
     title: "리덕스",
     desc: "안녕",
-    isDone: true
-  }
+    isDone: true,
+  };
 
   const onClickAdd = () => {
-    dispatch(addTodo({...data}))
-  }
+    dispatch(addTodo({ ...data }));
+  };
 
   const onClickTodo = () => {
-    navigate(`/todo/${data.id}`)
-  }
+    navigate(`/todo/${data.id}`);
+  };
 
   return (
     <>
@@ -39,22 +39,29 @@ export default function Home() {
         <StyledWrapper>
           <StyledHeader>My Todo List</StyledHeader>
           <div style={{ margin: "96px 0 0 0" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", margin: "24px 0" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                margin: "24px 0",
+              }}
+            >
               <div className="input-wrapper">
-                <Input name="title" label="제목"/>
+                <Input name="title" label="제목" />
                 <Input name="desc" label="내용" />
               </div>
               <StyledButton
                 isAdd
+                disabled={!value.title || !value.desc}
                 onClick={onClickAdd}
-              >추가하기</StyledButton>
+              >
+                추가하기
+              </StyledButton>
             </div>
             <div className="todos-container">
               <div className="todos-wrapper">
                 <StyledText>🔥working🔥</StyledText>
-                <div className="todos-list">
-
-                </div>
+                <div className="todos-list"></div>
               </div>
               <div className="todos-wrapper">
                 <StyledText>✨done✨</StyledText>
@@ -63,7 +70,6 @@ export default function Home() {
                   <TodoItem {...data} />
                   <TodoItem {...data} />
                   <TodoItem {...data} />
-
                 </div>
               </div>
             </div>
@@ -71,13 +77,13 @@ export default function Home() {
         </StyledWrapper>
       </StyledContainer>
     </>
-  )
+  );
 }
 
 const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 const StyledWrapper = styled.div`
   width: 1000px;
@@ -97,10 +103,10 @@ const StyledWrapper = styled.div`
 
     .todos-wrapper {
       padding: 24px;
-      background-color: #F5F5F5;
+      background-color: #f5f5f5;
       border-radius: 16px;
-      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),
+        0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 
       .todos-list {
         padding: 24px 0 0;
@@ -110,7 +116,7 @@ const StyledWrapper = styled.div`
       }
     }
   }
-`
+`;
 
 const StyledHeader = styled.div`
   width: 100%;
@@ -119,11 +125,11 @@ const StyledHeader = styled.div`
   left: 0;
   height: 72px;
   border-bottom: 1px solid #333;
-  background-color: #FFF;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const StyledText = styled.p`
   width: 100%;
@@ -131,4 +137,4 @@ const StyledText = styled.p`
   font-size: 2rem;
   font-weight: 700;
   color: #333;
-`
+`;
