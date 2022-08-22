@@ -1,17 +1,16 @@
 import { useState } from "react"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/router";
 
 import { addTodo } from "../store/modules/todos"
 
 import { TodoItem, StyledButton } from "../components/TodoItem"
 import { Input } from "../components/Input"
-import { useNavigate } from "react-router-dom"
 
 export default function Home() {
+  const navigate = useRouter().push;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -20,7 +19,7 @@ export default function Home() {
   console.log(todos)
 
   const data = {
-    id: "",
+    id: 1,
     title: "리덕스",
     desc: "안녕",
     isDone: true
@@ -28,6 +27,10 @@ export default function Home() {
 
   const onClickAdd = () => {
     dispatch(addTodo({...data}))
+  }
+
+  const onClickTodo = () => {
+    navigate(`/todo/${data.id}`)
   }
 
   return (
@@ -56,7 +59,7 @@ export default function Home() {
               <div className="todos-wrapper">
                 <StyledText>✨done✨</StyledText>
                 <div className="todos-list">
-                  <TodoItem {...data} />
+                  <TodoItem {...data} onClick={onClickTodo} />
                   <TodoItem {...data} />
                   <TodoItem {...data} />
                   <TodoItem {...data} />
