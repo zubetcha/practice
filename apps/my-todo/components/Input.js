@@ -1,28 +1,24 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-export const Input = ({name, label}) => {
+export const Input = ({ name, label, onChange }) => {
   return (
-    <StyledContainer>
+    <StyledInputContainer>
       <label htmlFor={name}>{label}</label>
-      <input type="text" name={name} />
-    </StyledContainer>
-  )
-}
+      <input type="text" name={name} onChange={onChange} />
+    </StyledInputContainer>
+  );
+};
 
-const StyledContainer = styled.div`
+const StyledInputContainer = styled.div`
   display: flex;
   align-items: center;
   column-gap: 12px;
 
-
   label {
-
   }
 
   input {
     width: 240px;
     padding: 8px;
-
   }
-`
-
+`;

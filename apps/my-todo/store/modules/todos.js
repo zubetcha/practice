@@ -1,4 +1,5 @@
-import { createAction, handleActions } from 'redux-actions'
+import { createAction, handleActions } from "redux-actions";
+import { v4 as uuidv4 } from "uuid";
 
 /* action type */
 
@@ -9,17 +10,25 @@ const TOGGLE_TODO = "todo/TOGGLE";
 
 /* action creator */
 
-export const addTodo = createAction(ADD_TODO, (payload) => payload)
-export const getTodoById = createAction(GET_TODO_BY_ID, (payload) => payload)
-export const deleteTodo = createAction(DELETE_TODO, (payload) => payload)
-export const toggleTodo = createAction(TOGGLE_TODO, (payload) => payload)
+export const addTodo = createAction(ADD_TODO, (payload) => payload);
+export const getTodoById = createAction(GET_TODO_BY_ID, (payload) => payload);
+export const deleteTodo = createAction(DELETE_TODO, (payload) => payload);
+export const toggleTodo = createAction(TOGGLE_TODO, (payload) => payload);
 
 /* initial state */
 
 const initialState = {
-  todos: []
-}
-
+  todos: new Array(4)
+    .fill({ id: null, title: "", desc: "", isDone: false })
+    .map((el, i) => {
+      return {
+        ...el,
+        id: uuidv4(),
+        title: `title${i}`,
+        desc: `desc${i}`,
+      };
+    }),
+};
 
 /* reducer */
 
