@@ -9,9 +9,9 @@ const TOGGLE_TODO = "todo/TOGGLE";
 
 /* action creator */
 
-export const addTodo = createAction(ADD_TODO, (payload) => payload);
-export const deleteTodo = createAction(DELETE_TODO, (payload) => payload);
-export const toggleTodo = createAction(TOGGLE_TODO, (payload) => payload);
+export const addTodo = createAction(ADD_TODO, (payload) => payload); // todo
+export const deleteTodo = createAction(DELETE_TODO, (payload) => payload); // todo id
+export const toggleTodo = createAction(TOGGLE_TODO, (payload) => payload); // todo id
 
 /* initial state */
 
@@ -35,16 +35,23 @@ const todos = (state = initialState, action) => {
     // TODO: todo 생성
     case ADD_TODO:
       return {
+        todos: [...state.todos, action.payload],
       };
 
     // TODO: todo 삭제
     case DELETE_TODO:
       return {
+        // Array.filter
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
 
     // TODO: todo 상태 업데이트
     case TOGGLE_TODO:
       return {
+        // Array.map
+        todos: state.todos.map((todo) => {
+          return todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo
+        })
       };
 
     default:

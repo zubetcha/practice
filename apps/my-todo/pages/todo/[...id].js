@@ -1,10 +1,11 @@
 
 import { TodoItem } from "../../components/TodoItem";
-import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { useLocation } from "../../hooks/useLocation";
 
 const TodoDetailPage = () => {
-  const id = useRouter().asPath.split("/")[2];;
+  const location = useLocation()
+  const id = location.pathname.split("/")[2];
 
   const { todos } = useSelector(({ todos }) => todos);
   const todo = todos.find((todo) => todo.id === id);

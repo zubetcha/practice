@@ -12,13 +12,34 @@ export default function Home() {
   const [inputValue, setInputValue] = useState({ title: "", desc: "" });
 
   // TODO: 리덕스에서 todos 가져오기
+  const todoList = useSelector((module) => module.todos.todos);
+
+
+  // TODO: filter 함수 만들기
+  const _getTodosByIsDone = (todos, isDone) => {
+    return todos.filter((todo) => todo.isDone === isDone);
+  }
 
 
   // TODO: todo의 상태에 따라 리스트 분리하기
+  // Array.filter
+  const workingTodos = _getTodosByIsDone(todoList, false);
+  const doneTodos = _getTodosByIsDone(todoList, true);
 
 
   // TODO: onClickAdd 함수 만들기
   const onClickAdd = () => {
+    const { title, desc } = inputValue;
+    const todo = {
+    	id: uuidv4(), // 고유한 값
+    	title: title,
+    	desc: desc,
+    	isDone: false,
+    }
+
+    if (title === "" || desc === "") return
+
+    dispatch(addTodo(todo));
   };
 
   const onChange = (e) => {
@@ -54,11 +75,21 @@ export default function Home() {
             <div className="todos-container">
               <div className="todos-wrapper">
                 <StyledText>🔥working🔥</StyledText>
-                <div className="todos-list">{/* TODO: 완료X */}</div>
+                <div className="todos-list">
+                  {/* TODO */}
+                  {workingTodos.map((todo) => {
+                    return <TodoItem key={todo.id} {...todo} />
+                  })}
+                </div>
               </div>
               <div className="todos-wrapper">
                 <StyledText>✨done✨</StyledText>
-                <div className="todos-list">{/* TODO: 완료O */}</div>
+                <div className="todos-list">
+                  {/* TODO */}
+                  {doneTodos.map((todo) => {
+                    return <TodoItem key={todo.id} {...todo} />
+                  })}
+                </div>
               </div>
             </div>
           </div>

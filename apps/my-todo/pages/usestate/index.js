@@ -4,6 +4,8 @@ import { StyledTodoButton } from "../../components/TodoItem";
 
 const UseState = () => {
   const [num, setNum] = useState(0);
+  const [yes, setYes] = useState(0)
+  const [no, setNo] = useState(0);
 
   console.log("useState render");
   
@@ -13,10 +15,13 @@ const UseState = () => {
     setNum(num + 1);
     setNum(num + 1);
 
+    setYes(num + 1);
+    setNo(num + 1);
+
     // DESCRIBE: 함수 업데이트 
-    // setNum((prev) => prev + 1);
-    // setNum((prev) => prev + 1);
-    // setNum((prev) => prev + 1);
+    setNum((prev) => prev + 1);
+    setNum((prev) => prev + 1);
+    setNum((prev) => prev + 1);
 
     // DESCRIBE: batch X
     // flushSync(() => {
@@ -24,15 +29,23 @@ const UseState = () => {
     // })
 
     // flushSync(() => {
-    //   setNum(num + 1);
+    //   setYes(yes + 1);
     // });
 
     // flushSync(() => {
-    //   setNum(num + 1);
+    //   setNo(no + 1);
     // });
-
-    console.log(num)
   }
+
+  let origin = { num: 0 };
+  const change = Object.assign({}, 
+    { num: num + 1 },
+    { num: num + 1 },
+    { num: num + 1 },
+  );
+  
+  // console.log(origin)
+  // console.log(change)
 
   return (
     <>
