@@ -11,6 +11,13 @@ export default function Home() {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState({ title: "", desc: "" });
 
+  // TODO: 리덕스에서 todos 가져오기
+
+
+  // TODO: todo의 상태에 따라 리스트 분리하기
+
+
+  // TODO: onClickAdd 함수 만들기
   const onClickAdd = () => {
   };
 
@@ -47,13 +54,11 @@ export default function Home() {
             <div className="todos-container">
               <div className="todos-wrapper">
                 <StyledText>🔥working🔥</StyledText>
-                <div className="todos-list">
-                </div>
+                <div className="todos-list">{/* TODO: 완료X */}</div>
               </div>
               <div className="todos-wrapper">
                 <StyledText>✨done✨</StyledText>
-                <div className="todos-list">
-                </div>
+                <div className="todos-list">{/* TODO: 완료O */}</div>
               </div>
             </div>
           </div>

@@ -32,17 +32,17 @@ const initialState = {
 
 const todos = (state = initialState, action) => {
   switch (action.type) {
-    // TODO:
+    // TODO: todo 생성
     case ADD_TODO:
       return {
       };
 
-    // TODO:
+    // TODO: todo 삭제
     case DELETE_TODO:
       return {
       };
 
-    // TODO:
+    // TODO: todo 상태 업데이트
     case TOGGLE_TODO:
       return {
       };

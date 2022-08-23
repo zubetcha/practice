@@ -7,14 +7,16 @@ export const TodoItem = ({ id, title, desc, isDone }) => {
   const navigate = useNavigate();
 
 
-  // TODO:
+  // TODO: onClickDelete 함수 만들기
   const onClickDelete = () => {
 
   };
-  // TODO:
+
+  // TODO: onClickToggle 함수 만들기
   const onClickToggle = () => {
 
   };
+
   const onClickDetail = () => {
     navigate(`/todo/${id}`)
   }
@@ -30,6 +32,7 @@ export const TodoItem = ({ id, title, desc, isDone }) => {
           삭제
         </StyledTodoButton>
         <StyledTodoButton isDone>
+          {/* TODO todo 상태에 따라 다른 텍스트 보여주기 */}
           완료
         </StyledTodoButton>
         <StyledTodoButton onClick={onClickDetail}>상세</StyledTodoButton>
