@@ -1,52 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "../hooks/useNavigate";
 import { v4 as uuidv4 } from "uuid";
-
 import { addTodo } from "../store/modules/todos";
 
 import { TodoItem, StyledTodoButton } from "../components/TodoItem";
 import { Input } from "../components/Input";
 
 export default function Home() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [inputValue, setInputValue] = useState({ title: "", desc: "" });
 
-  const { todos } = useSelector(({ todos }) => todos);
-  console.log(todos);
-
-  const data = {
-    id: 1,
-    title: "리덕스",
-    desc: "안녕",
-    isDone: true,
-  };
-
   const onClickAdd = () => {
-    const { title, desc } = inputValue;
-    const todo = {
-      id: uuidv4(),
-      title,
-      desc,
-      isDone: false,
-    };
-
-    if (!title || !desc) return;
-    dispatch(addTodo({ ...todo }));
-  };
-
-  const onClickTodo = () => {
-    navigate(`/todo/${data.id}`);
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
   };
-
+  
   return (
     <>
       <StyledContainer>
@@ -75,18 +47,12 @@ export default function Home() {
             <div className="todos-container">
               <div className="todos-wrapper">
                 <StyledText>🔥working🔥</StyledText>
-                <div className="todos-list"></div>
+                <div className="todos-list">
+                </div>
               </div>
               <div className="todos-wrapper">
                 <StyledText>✨done✨</StyledText>
                 <div className="todos-list">
-                  {todos.map((todo) => (
-                    <TodoItem
-                      key={todo.id}
-                      {...todo}
-                      onClick={() => navigate(`/todo/${todo.id}`)}
-                    />
-                  ))}
                 </div>
               </div>
             </div>
